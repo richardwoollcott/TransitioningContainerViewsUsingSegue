@@ -53,7 +53,8 @@ namespace ContainerViews
         {
             toViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
 
-            fromViewController.WillMoveToParentViewController(this);
+            toViewController.WillMoveToParentViewController(this);
+
             AddChildViewController(toViewController);
 
             Transition(fromViewController, toViewController, 1.0, UIViewAnimationOptions.TransitionCrossDissolve, () => { }, (bool finished) => 

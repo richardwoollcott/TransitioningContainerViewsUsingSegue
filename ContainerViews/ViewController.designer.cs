@@ -16,31 +16,22 @@ namespace ContainerViews
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton FirstViewButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIView MainContainer { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton SecondViewButton { get; set; }
+        UIKit.UIButton SwapViewsButton { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (FirstViewButton != null) {
-                FirstViewButton.Dispose ();
-                FirstViewButton = null;
-            }
-
             if (MainContainer != null) {
                 MainContainer.Dispose ();
                 MainContainer = null;
             }
 
-            if (SecondViewButton != null) {
-                SecondViewButton.Dispose ();
-                SecondViewButton = null;
+            if (SwapViewsButton != null) {
+                SwapViewsButton.Dispose ();
+                SwapViewsButton = null;
             }
         }
     }

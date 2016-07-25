@@ -32,78 +32,28 @@
                                 </constraints>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="204" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="230" y="100" width="116" height="30"/>
-                                <state key="normal" title="First View">
+                                <rect key="frame" x="130" y="109" width="116" height="30"/>
+                                <state key="normal" title="Swap Views">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="130" y="101" width="116" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="224"/>
-                                    </mask>
                                 </variation>
                                 <constraints>
-                                    <constraint id="224" firstAttribute="width" constant="116"/>
+                                    <constraint id="273" firstAttribute="width" constant="116"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="224"/>
-                                    </mask>
-                                </variation>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="205" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="230" y="176" width="116" height="30"/>
-                                <state key="normal" title="Second View">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="130" y="170" width="116" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="228"/>
-                                    </mask>
-                                </variation>
-                                <constraints>
-                                    <constraint id="228" firstAttribute="width" constant="116"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="228"/>
-                                    </mask>
-                                </variation>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint id="222" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="204" secondAttribute="trailing" constant="129"/>
-                            <constraint id="223" firstItem="204" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="101"/>
-                            <constraint id="225" firstItem="205" firstAttribute="centerX" secondItem="204" secondAttribute="centerX"/>
-                            <constraint id="226" firstItem="205" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
-                            <constraint id="227" firstItem="205" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="170"/>
                             <constraint id="261" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20"/>
                             <constraint id="262" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="35" secondAttribute="bottom" constant="87"/>
+                            <constraint id="271" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="204" secondAttribute="trailing" constant="129"/>
+                            <constraint id="272" firstItem="204" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="109"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="222"/>
-                                <exclude reference="223"/>
-                                <exclude reference="225"/>
-                                <exclude reference="226"/>
-                                <exclude reference="227"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="222"/>
-                                <include reference="223"/>
-                                <include reference="225"/>
-                                <include reference="226"/>
-                                <include reference="227"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="MainContainer" destination="35" id="name-outlet-35"/>
-                        <outlet property="FirstViewButton" destination="204" id="name-outlet-204"/>
-                        <outlet property="SecondViewButton" destination="205" id="name-outlet-205"/>
+                        <outlet property="SwapViewsButton" destination="204" id="name-outlet-204"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
