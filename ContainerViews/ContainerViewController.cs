@@ -11,6 +11,8 @@ namespace ContainerViews
 
         private NSString currentSegueIdentifier;
 
+        private object locker = new object();
+
         public ContainerViewController(IntPtr handle) : base(handle)
         {
         }
@@ -19,9 +21,9 @@ namespace ContainerViews
         {
             base.ViewDidLoad();
 
-            currentSegueIdentifier = SegueIdentifierFirst;
+            //currentSegueIdentifier = SegueIdentifierFirst;
 
-            PerformSegue(currentSegueIdentifier, this);
+            //PerformSegue(currentSegueIdentifier, this);
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -37,7 +39,9 @@ namespace ContainerViews
                     //on first run no transition animation
                     AddChildViewController(segue.DestinationViewController);
 
-                    segue.DestinationViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
+                    segue.DestinationViewController.View.Frame = this.View.Bounds;
+
+                    //segue.DestinationViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
                     Add(segue.DestinationViewController.View);
 
                     segue.DestinationViewController.DidMoveToParentViewController(this);
@@ -47,17 +51,19 @@ namespace ContainerViews
             {
                 swapFromViewController(this.ChildViewControllers[0], segue.DestinationViewController);
             }
+           
         }
 
         private void swapFromViewController(UIViewController fromViewController, UIViewController toViewController)
         {
-            toViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
+            //toViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
+            toViewController.View.Frame = this.View.Bounds;
 
             toViewController.WillMoveToParentViewController(this);
 
             AddChildViewController(toViewController);
 
-            Transition(fromViewController, toViewController, 1.0, UIViewAnimationOptions.TransitionCrossDissolve, () => { }, (bool finished) => 
+            Transition(fromViewController, toViewController, 0.5, UIViewAnimationOptions.TransitionCrossDissolve, () => { }, (bool finished) => 
             { 
                 fromViewController.RemoveFromParentViewController();
                 toViewController.DidMoveToParentViewController(this);
@@ -68,7 +74,18 @@ namespace ContainerViews
         {
             currentSegueIdentifier = currentSegueIdentifier == SegueIdentifierFirst ? SegueIdentifierSecond : SegueIdentifierFirst;
 
+            //TODO prefer null or this as second parameter
             PerformSegue(currentSegueIdentifier, null);
+        }
+
+        public void PresentFirstView()
+        {
+            PerformSegue(SegueIdentifierFirst, this);
+        }
+
+        public void PresentSecondView()
+        {
+            PerformSegue(SegueIdentifierSecond, this);
         }
     }
 }

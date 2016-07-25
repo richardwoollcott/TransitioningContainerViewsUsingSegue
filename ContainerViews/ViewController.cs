@@ -29,6 +29,16 @@ namespace ContainerViews
             {
                 containerViewController.SwapViewControllers();
             };
+
+            FirstViewButton.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                containerViewController.PresentFirstView();   
+            };
+
+            SecondViewButton.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                containerViewController.PresentSecondView();
+            };
         }
 
         public override void DidReceiveMemoryWarning()
