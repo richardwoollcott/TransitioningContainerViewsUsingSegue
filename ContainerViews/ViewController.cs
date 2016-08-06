@@ -25,27 +25,39 @@ namespace ContainerViews
         {
             base.ViewDidLoad();
 
-            SwapViewsButton.TouchUpInside += (object sender, EventArgs e) => 
-            {
-                containerViewController.SwapViewControllers();
-            };
+            //select the First view
+            SegmentedView.SelectedSegment = 0;
+            PresentContainerView(SegmentedView.SelectedSegment);
 
-            FirstViewButton.TouchUpInside += (object sender, EventArgs e) =>
+            SegmentedView.ValueChanged += (sender, e) =>
             {
-                containerViewController.PresentFirstView();   
-            };
-
-            SecondViewButton.TouchUpInside += (object sender, EventArgs e) =>
-            {
-                containerViewController.PresentSecondView();
+                var selectedSegmentId = (sender as UISegmentedControl).SelectedSegment;
+                PresentContainerView(selectedSegmentId);
             };
         }
 
-        public override void DidReceiveMemoryWarning()
+        async void PresentContainerView(nint selectedId)
         {
-            base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
+            //we need some synchronisation because the new view controller
+            //is animated in. Disable the switch until the animation is complete
+            if (selectedId == 0)
+            {
+                SegmentedView.Enabled = false;
+
+                await containerViewController.PresentFirstViewAsync();
+
+                SegmentedView.Enabled = true;
+            }
+            else if (selectedId == 1)
+            {
+                SegmentedView.Enabled = false;
+
+                await containerViewController.PresentSecondViewAsync();
+
+                SegmentedView.Enabled = true;
+            }
         }
+
     }
 }
 

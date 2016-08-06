@@ -31,59 +31,22 @@
                                     <constraint id="264" firstAttribute="height" constant="300"/>
                                 </constraints>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="204" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="130" y="109" width="116" height="30"/>
-                                <state key="normal" title="Swap Views">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="130" y="101" width="116" height="30"/>
-                                </variation>
-                                <constraints>
-                                    <constraint id="294" firstAttribute="width" constant="116"/>
-                                </constraints>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="280" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="130" y="154" width="116" height="30"/>
-                                <state key="normal" title="First View">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="130" y="101" width="116" height="30"/>
-                                </variation>
-                                <constraints>
-                                    <constraint id="297" firstAttribute="width" constant="116"/>
-                                </constraints>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="284" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="130" y="204" width="116" height="30"/>
-                                <state key="normal" title="Second View">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="130" y="101" width="116" height="30"/>
-                                </variation>
-                                <constraints>
-                                    <constraint id="300" firstAttribute="width" constant="116"/>
-                                </constraints>
-                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="309">
+                                <rect key="frame" x="126" y="134" width="123" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint id="261" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20"/>
                             <constraint id="262" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="35" secondAttribute="bottom" constant="87"/>
-                            <constraint id="292" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="204" secondAttribute="trailing" constant="129"/>
-                            <constraint id="293" firstItem="204" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="109"/>
-                            <constraint id="295" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="280" secondAttribute="trailing" constant="129"/>
-                            <constraint id="296" firstItem="280" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="154"/>
-                            <constraint id="298" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="284" secondAttribute="trailing" constant="129"/>
-                            <constraint id="299" firstItem="284" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="204"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="MainContainer" destination="35" id="name-outlet-35"/>
-                        <outlet property="SwapViewsButton" destination="204" id="name-outlet-204"/>
-                        <outlet property="FirstViewButton" destination="280" id="name-outlet-280"/>
-                        <outlet property="SecondViewButton" destination="284" id="name-outlet-284"/>
+                        <outlet property="SegmentedView" destination="309" id="name-outlet-309"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

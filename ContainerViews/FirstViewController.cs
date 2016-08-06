@@ -9,10 +9,5 @@ namespace ContainerViews
         public FirstViewController(IntPtr handle) : base(handle)
         {
         }
-
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            base.PrepareForSegue(segue, sender);
-        }
     }
 }

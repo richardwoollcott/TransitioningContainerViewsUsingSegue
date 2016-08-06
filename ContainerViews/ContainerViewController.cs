@@ -1,91 +1,96 @@
 using Foundation;
 using System;
 using UIKit;
+using System.Threading.Tasks;
 
 namespace ContainerViews
 {
     public partial class ContainerViewController : UIViewController
     {
-        private NSString SegueIdentifierFirst = (Foundation.NSString)"embedFirst";
-        private NSString SegueIdentifierSecond = (Foundation.NSString)"embedSecond";
+        private NSString SegueIdentifierFirst = (NSString)"embedFirst";
+        private NSString SegueIdentifierSecond = (NSString)"embedSecond";
 
-        private NSString currentSegueIdentifier;
-
-        private object locker = new object();
+        private TaskCompletionSource<bool> viewChangingTcs;
 
         public ContainerViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public override void ViewDidLoad()
+        public TaskCompletionSource<bool> ViewChangingTcs
         {
-            base.ViewDidLoad();
-
-            //currentSegueIdentifier = SegueIdentifierFirst;
-
-            //PerformSegue(currentSegueIdentifier, this);
+            get { return viewChangingTcs; }
         }
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        public Task<bool> PresentFirstViewAsync()
         {
-            if (segue.Identifier == SegueIdentifierFirst)
+            viewChangingTcs = new TaskCompletionSource<bool>();
+
+            PerformSegue(SegueIdentifierFirst, this);
+
+            return viewChangingTcs.Task;
+        }
+
+        public Task<bool> PresentSecondViewAsync()
+        {
+            viewChangingTcs = new TaskCompletionSource<bool>();
+
+            PerformSegue(SegueIdentifierSecond, this);
+
+            return viewChangingTcs.Task;
+        }
+
+        public override void PrepareForSegue(UIStoryboardSegue segue,
+                                             NSObject sender)
+        {
+            if ((segue.Identifier == SegueIdentifierFirst) ||
+                (segue.Identifier == SegueIdentifierSecond))
             {
-                if (this.ChildViewControllers.Length > 0)
+                if (ChildViewControllers.Length > 0)
                 {
-                    swapFromViewController(this.ChildViewControllers[0], segue.DestinationViewController);
+                    SwapFromViewController(ChildViewControllers[0], segue.DestinationViewController);
                 }
                 else
                 {
-                    //on first run no transition animation
-                    AddChildViewController(segue.DestinationViewController);
-
-                    segue.DestinationViewController.View.Frame = this.View.Bounds;
-
-                    //segue.DestinationViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
-                    Add(segue.DestinationViewController.View);
-
-                    segue.DestinationViewController.DidMoveToParentViewController(this);
+                    AddInitialViewController(segue.DestinationViewController);
                 }
             }
-            else if (segue.Identifier == SegueIdentifierSecond)
-            {
-                swapFromViewController(this.ChildViewControllers[0], segue.DestinationViewController);
-            }
-           
         }
 
-        private void swapFromViewController(UIViewController fromViewController, UIViewController toViewController)
+        private void AddInitialViewController(UIViewController viewController)
         {
-            //toViewController.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Frame.Size.Width, this.View.Frame.Size.Height);
-            toViewController.View.Frame = this.View.Bounds;
+            //on first run no transition animation
+            AddChildViewController(viewController);
 
-            toViewController.WillMoveToParentViewController(this);
+            viewController.View.Frame = View.Bounds;
+
+            Add(viewController.View);
+
+            viewController.DidMoveToParentViewController(this);
+
+            viewChangingTcs.TrySetResult(true);
+        }
+
+        private void SwapFromViewController(UIViewController fromViewController,
+                                            UIViewController toViewController)
+        {
+            fromViewController.WillMoveToParentViewController(null);
+
+            toViewController.View.Frame = this.View.Bounds;
 
             AddChildViewController(toViewController);
 
-            Transition(fromViewController, toViewController, 0.5, UIViewAnimationOptions.TransitionCrossDissolve, () => { }, (bool finished) => 
-            { 
-                fromViewController.RemoveFromParentViewController();
-                toViewController.DidMoveToParentViewController(this);
-            });
-        }
-    
-        public void SwapViewControllers()
-        {
-            currentSegueIdentifier = currentSegueIdentifier == SegueIdentifierFirst ? SegueIdentifierSecond : SegueIdentifierFirst;
+            Transition(fromViewController,
+                       toViewController,
+                       0.3,
+                       UIViewAnimationOptions.TransitionCrossDissolve,
+                       () => { },
+                       (bool finished) =>
+                        {
+                            fromViewController.RemoveFromParentViewController();
+                            toViewController.DidMoveToParentViewController(this);
 
-            //TODO prefer null or this as second parameter
-            PerformSegue(currentSegueIdentifier, null);
-        }
-
-        public void PresentFirstView()
-        {
-            PerformSegue(SegueIdentifierFirst, this);
-        }
-
-        public void PresentSecondView()
-        {
-            PerformSegue(SegueIdentifierSecond, this);
+                            viewChangingTcs.TrySetResult(true);
+                        });
         }
     }
 }
