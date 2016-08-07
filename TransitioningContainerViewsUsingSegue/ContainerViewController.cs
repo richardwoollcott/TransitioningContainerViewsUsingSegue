@@ -40,6 +40,5 @@ namespace ContainerViews
 
             return viewChanging.Task;
         }
-
     }
 }
