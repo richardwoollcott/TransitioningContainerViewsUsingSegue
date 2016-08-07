@@ -5,40 +5,40 @@ using System.Threading.Tasks;
 
 namespace ContainerViews
 {
-    public partial class ContainerViewController : UIViewController
+    public partial class ContainerViewController : UIViewController, ITransitioningViewController
     {
         private NSString SegueIdentifierFirst = (NSString)"embedFirst";
         private NSString SegueIdentifierSecond = (NSString)"embedSecond";
 
-        private TaskCompletionSource<bool> viewChangingTcs;
+        private TaskCompletionSource<bool> viewChanging;
 
         public ContainerViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public TaskCompletionSource<bool> ViewChangingTcs
+        public TaskCompletionSource<bool> ViewChanging
         {
-            get { return viewChangingTcs; }
+            get { return viewChanging; }
 
-            set { viewChangingTcs = value; }
+            set { viewChanging = value; }
         }
 
         public Task<bool> PresentFirstViewAsync()
         {
-            ViewChangingTcs = new TaskCompletionSource<bool>();
+            ViewChanging = new TaskCompletionSource<bool>();
 
             PerformSegue(SegueIdentifierFirst, this);
 
-            return viewChangingTcs.Task;
+            return viewChanging.Task;
         }
 
         public Task<bool> PresentSecondViewAsync()
         {
-            ViewChangingTcs = new TaskCompletionSource<bool>();
+            ViewChanging = new TaskCompletionSource<bool>();
 
             PerformSegue(SegueIdentifierSecond, this);
 
-            return viewChangingTcs.Task;
+            return viewChanging.Task;
         }
 
     }

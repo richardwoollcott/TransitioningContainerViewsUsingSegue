@@ -1,4 +1,3 @@
-using Foundation;
 using System;
 using UIKit;
 
@@ -33,8 +32,9 @@ namespace ContainerViews
 
             viewController.DidMoveToParentViewController(SourceViewController);
 
-            var containerViewController = SourceViewController as ContainerViewController;
-            containerViewController.ViewChangingTcs.TrySetResult(true);
+            var containerViewController = SourceViewController as ITransitioningViewController;
+            if(containerViewController != null)
+                containerViewController.ViewChanging.TrySetResult(true);
         }
 
         private void SwapFromViewController(UIViewController fromViewController,
@@ -56,8 +56,9 @@ namespace ContainerViews
                             fromViewController.RemoveFromParentViewController();
                             toViewController.DidMoveToParentViewController(SourceViewController);
 
-                            var containerViewController = SourceViewController as ContainerViewController;
-                            containerViewController.ViewChangingTcs.TrySetResult(true);
+                            var containerViewController = SourceViewController as ITransitioningViewController;
+                            if (containerViewController != null)
+                                containerViewController.ViewChanging.TrySetResult(true);
                         });
         }
     }

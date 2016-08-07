@@ -131,6 +131,7 @@
     <Compile Include="TransitionSegue.designer.cs">
       <DependentUpon>TransitionSegue.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITransitioningViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
