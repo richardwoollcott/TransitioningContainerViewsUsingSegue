@@ -127,9 +127,9 @@
     <Compile Include="SecondViewController.designer.cs">
       <DependentUpon>SecondViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmptySegue.cs" />
-    <Compile Include="EmptySegue.designer.cs">
-      <DependentUpon>EmptySegue.cs</DependentUpon>
+    <Compile Include="TransitionSegue.cs" />
+    <Compile Include="TransitionSegue.designer.cs">
+      <DependentUpon>TransitionSegue.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

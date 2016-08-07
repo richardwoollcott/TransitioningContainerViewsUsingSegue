@@ -67,8 +67,8 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <segue id="158" destination="49" kind="custom" identifier="embedFirst" customClass="EmptySegue"/>
-                        <segue id="202" destination="56" kind="custom" identifier="embedSecond" customClass="EmptySegue"/>
+                        <segue id="158" destination="49" kind="custom" identifier="embedFirst" customClass="TransitionSegue"/>
+                        <segue id="202" destination="56" kind="custom" identifier="embedSecond" customClass="TransitionSegue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40" userLabel="First Responder" sceneMemberID="firstResponder"/>
