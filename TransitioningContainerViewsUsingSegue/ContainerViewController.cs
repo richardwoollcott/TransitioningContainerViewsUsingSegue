@@ -25,7 +25,7 @@ namespace ContainerViews
 
         public Task<bool> PresentFirstViewAsync()
         {
-            viewChangingTcs = new TaskCompletionSource<bool>();
+            ViewChangingTcs = new TaskCompletionSource<bool>();
 
             PerformSegue(SegueIdentifierFirst, this);
 
@@ -34,7 +34,7 @@ namespace ContainerViews
 
         public Task<bool> PresentSecondViewAsync()
         {
-            viewChangingTcs = new TaskCompletionSource<bool>();
+            ViewChangingTcs = new TaskCompletionSource<bool>();
 
             PerformSegue(SegueIdentifierSecond, this);
 
